@@ -1,0 +1,79 @@
+.container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.movieContainer {
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.poster {
+    width: 250px;
+    height: 350px;
+    object-fit: cover;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-right: 25px;
+}
+
+
+.title {
+    margin-bottom: 16px;
+    color: #2c3e50;
+}
+
+.score {
+    font-size: 1.2rem;
+    margin-bottom: 16px;
+    color: #666;
+}
+
+.overview {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+    color: #333;
+}
+
+.genresContainer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.genresLabel {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.genreTag {
+    padding: 6px 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.errorContainer {
+    text-align: center;
+    padding: 40px;
+}
+
+.additionalInfoContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.button {
+    margin-top: 10px;
+    margin-left: 20px;
+}

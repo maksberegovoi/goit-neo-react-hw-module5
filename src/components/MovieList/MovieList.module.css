@@ -1,0 +1,9 @@
+.movies {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+}
+
+.moviesItem {
+    padding: 2px;
+}
