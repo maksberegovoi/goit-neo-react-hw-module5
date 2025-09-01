@@ -1,9 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {NavLink, useParams} from "react-router-dom";
+import React, {Suspense, useEffect, useRef, useState} from 'react';
+import {
+  generatePath,
+  Link,
+  NavLink,
+  Outlet,
+  useLocation,
+  useParams
+} from "react-router-dom";
 import axios from "axios";
 import {
   API_TOKEN,
-  IMG_URL,
+  IMG_URL, MOVIE_BY_ID_ROUTE,
   MOVIE_CAST_ROUTE,
   MOVIE_REVIEWS_ROUTE
 } from "../../utils/consts.js";
@@ -14,6 +21,8 @@ import styles from './MovieDetailsPage.module.css'
 
 const MovieDetailsPage = () => {
   const {movieId} = useParams()
+  const location = useLocation()
+  const btnBackLocation = useRef(location.state?.from || '/movies')
 
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
@@ -50,54 +59,69 @@ const MovieDetailsPage = () => {
 
   return (
     <div>
-      <button
-        className={styles.button}
-        onClick={() => window.history.back()}
-      >← Go back
-      </button>
+      <Link
+        to={btnBackLocation.current}
+        className={styles.buttonBack}
+      >
+        &#8592; Back
+      </Link>
       {loading && <Loader/>}
       {error
         ?
         <ErrorLoading/>
         :
         <div className={styles.container}>
-          <img
-            className={styles.poster}
-            src={IMG_URL + movie.poster_path}
-            alt={movie.title}
-          />
-          <div className={styles.infoContainer}>
-            <h1 className={styles.title}>{movie.title}</h1>
+          <div className={styles.movieContainer}>
+            <img
+              className={styles.poster}
+              src={IMG_URL + movie.poster_path}
+              alt={movie.title}
+            />
+            <div className={styles.infoContainer}>
+              <h1 className={styles.title}>{movie.title}</h1>
 
-            <p className={styles.score}>
-              <strong>User Score:</strong> {Math.round(movie.vote_average * 10)}%
-            </p>
-
-            <div className={styles.overviewSection}>
-              <h3>Overview:</h3>
-              <p className={styles.overview}>
-                {movie.overview || 'No overview available.'}
+              <p className={styles.score}>
+                <strong>User Score:</strong> {Math.round(
+                movie.vote_average * 10)}%
               </p>
-            </div>
 
-            <div className={styles.genresContainer}>
-              <span className={styles.genresLabel}>Genres:</span>
-              {movie.genres?.map(genre => (
-                <span
-                  key={genre.id}
-                  className={styles.genreTag}
-                >
-                {genre.name}
-              </span>
-              )) || <span>No genres available</span>}
-            </div>
-            <div>
-              <h4>Additional info:</h4>
-              <div className={styles.additionalInfoContainer}>
-                <NavLink to={MOVIE_CAST_ROUTE}>Cast</NavLink>
-                <NavLink to={MOVIE_REVIEWS_ROUTE}>Reviews</NavLink>
+              <div className={styles.overviewSection}>
+                <h3>Overview:</h3>
+                <p className={styles.overview}>
+                  {movie.overview || 'No overview available.'}
+                </p>
+              </div>
+
+              <div className={styles.genresContainer}>
+                <span className={styles.genresLabel}>Genres:</span>
+                {movie.genres?.map(genre => (
+                  <span
+                    key={genre.id}
+                    className={styles.genreTag}
+                  >
+                        {genre.name}
+                      </span>
+                )) || <span>No genres available</span>}
+              </div>
+              <div>
+                <h4>Additional info:</h4>
+                <div className={styles.additionalInfoContainer}>
+                  <NavLink
+                    to={generatePath(
+                      MOVIE_CAST_ROUTE, {movieId: movieId})}
+                  >Cast</NavLink>
+                  <NavLink
+                    to={generatePath(
+                      MOVIE_REVIEWS_ROUTE, {movieId: movieId})}
+                  >Reviews</NavLink>
+                </div>
               </div>
             </div>
+          </div>
+          <div className={styles.outletContainer}>
+            <Suspense fallback={<Loader/>}>
+              <Outlet/>
+            </Suspense>
           </div>
         </div>
       }

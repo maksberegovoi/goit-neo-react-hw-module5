@@ -19,8 +19,19 @@ const NotFoundPage = lazy(
 export const publicRoutes = [
   {path: HOME_ROUTE, Component: HomePage},
   {path: MOVIES_ROUTE, Component: MoviesPage},
-  {path: MOVIE_BY_ID_ROUTE, Component: MovieDetailsPage},
-  {path: MOVIE_CAST_ROUTE, Component: MovieCast},
-  {path: MOVIE_REVIEWS_ROUTE, Component: MovieReviews},
+  {
+    path: MOVIE_BY_ID_ROUTE,
+    Component: MovieDetailsPage,
+    children: [
+      {
+        path: MOVIE_CAST_ROUTE,
+        Component: MovieCast
+      },
+      {
+        path: MOVIE_REVIEWS_ROUTE,
+        Component: MovieReviews
+      }
+    ]
+  },
   {path: '*', Component: NotFoundPage}
 ];

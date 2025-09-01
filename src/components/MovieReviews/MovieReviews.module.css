@@ -1,0 +1,23 @@
+.reviews {
+    list-style: none;
+}
+
+.reviews li:not(:last-child) {
+    margin-bottom: 20px;
+}
+
+.review {
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.reviewAuthor {
+    font-style: italic;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+    width: fit-content;
+}
+
+.noReviews {
+    text-align: center;
+}

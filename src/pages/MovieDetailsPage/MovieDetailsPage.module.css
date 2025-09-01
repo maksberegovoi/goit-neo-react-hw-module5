@@ -3,12 +3,17 @@
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
+    flex-direction: column;
+}
+
+.outletContainer {
+    margin-top: 30px;
+    padding: 10px;
 }
 
 .movieContainer {
+    padding: 10px;
     display: flex;
-    gap: 30px;
-    margin-top: 20px;
 }
 
 .poster {
@@ -73,7 +78,6 @@
     margin-top: 15px;
 }
 
-.button {
-    margin-top: 10px;
+.buttonBack {
     margin-left: 20px;
 }
