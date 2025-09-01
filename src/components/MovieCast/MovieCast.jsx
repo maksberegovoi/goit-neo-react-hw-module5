@@ -25,7 +25,6 @@ const MovieCast = () => {
           }
         })
       setMovieCast(response.data?.cast || [])
-      console.log(response.data)
     } catch (err) {
       console.log(err);
       setError(true)
@@ -48,30 +47,37 @@ const MovieCast = () => {
         <ErrorLoading/>
         :
         <ul className={styles.container}>
-          {movieCast.map(actor => {
-            return (
-              <li
-                key={actor.id}
-                className={styles.card}
-              >
-                <img
-                  src={IMG_URL + actor.profile_path}
-                  alt="Actor photo"
-                  className={styles.avatar}
-                />
-                <div className={styles.cardInfo}>
-                  <p className={styles.cardText}>
-                    <strong>
-                      {actor.name || 'actor name is unavailiable'}
-                    </strong>
-                  </p>
-                  <p className={styles.cardText}>
-                    {actor.character || 'actor role is unavailiable'}
-                  </p>
-                </div>
-              </li>
-            )
-          })}
+          {movieCast.length > 1
+            ?
+            movieCast.map(actor => {
+              return (
+                <li
+                  key={actor.id}
+                  className={styles.card}
+                >
+                  <img
+                    src={IMG_URL + actor.profile_path}
+                    alt="Actor photo"
+                    className={styles.avatar}
+                  />
+                  <div className={styles.cardInfo}>
+                    <p className={styles.cardText}>
+                      <strong>
+                        {actor.name || 'actor name is unavailiable'}
+                      </strong>
+                    </p>
+                    <p className={styles.cardText}>
+                      {actor.character || 'actor role is unavailiable'}
+                    </p>
+                  </div>
+                </li>
+              )
+            })
+            :
+            <div>
+              <p>There are no information for this movie yet.</p>
+            </div>
+          }
         </ul>
       }
     </div>

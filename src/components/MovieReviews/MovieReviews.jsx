@@ -25,7 +25,6 @@ const MovieReviews = () => {
           }
         })
       setReviews(response.data?.results || [])
-      console.log(response.data?.results)
     } catch (err) {
       console.log(err);
       setError(true)
