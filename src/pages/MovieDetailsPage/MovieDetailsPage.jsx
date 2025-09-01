@@ -18,7 +18,6 @@ const MovieDetailsPage = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
   const [movie, setMovie] = useState({})
-  const [genres, setGenres] = useState([])
 
   const options = {
     headers: {
@@ -35,7 +34,6 @@ const MovieDetailsPage = () => {
       options
     ).then(response => {
       setMovie(response.data)
-      setGenres(response.data.genres)
       console.log(response.data)
     })
       .catch(error => {
